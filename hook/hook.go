@@ -15,6 +15,8 @@ import (
 	"regexp"
 	"strconv"
 	"strings"
+
+	"github.com/ghodss/yaml"
 )
 
 // Constants used to specify the parameter source
@@ -490,7 +492,9 @@ func (h *Hook) ExtractCommandArgumentsForEnv(headers, query, payload *map[string
 // Hooks is an array of Hook objects
 type Hooks []Hook
 
-// LoadFromFile attempts to load hooks from specified JSON file
+// LoadFromFile attempts to load hooks from specified file
+// We assume that it is JSON, unless it has ".yaml" or ".yml" extension indicating it is YAML
+// (We don't require ".json" extension for JSON for backwards compatibility)
 func (h *Hooks) LoadFromFile(path string) error {
 	if path == "" {
 		return nil
@@ -503,7 +507,12 @@ func (h *Hooks) LoadFromFile(path string) error {
 		return e
 	}
 
-	e = json.Unmarshal(file, h)
+	if strings.HasSuffix(path, ".yaml") || strings.HasSuffix(path, ".yml") {
+		e = yaml.Unmarshal(file, h)
+	} else {
+		e = json.Unmarshal(file, h)
+	}
+
 	return e
 }
 

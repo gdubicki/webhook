@@ -42,7 +42,11 @@ If you are using unstable version of Debian linux ("sid"), you can install webho
 Prebuilt binaries for different architectures are available at [GitHub Releases](https://github.com/adnanh/webhook/releases).
 
 ## Configuration
-Next step is to define some hooks you want [webhook](https://github.com/adnanh/webhook/) to serve. Begin by creating an empty file named `hooks.json`. This file will contain an array of hooks the [webhook](https://github.com/adnanh/webhook/) will serve. Check [Hook definition page](https://github.com/adnanh/webhook/wiki/Hook-Definition) to see the detailed description of what properties a hook can contain, and how to use them.
+Next step is to define some hooks you want [webhook](https://github.com/adnanh/webhook/) to serve.
+
+(Note that both JSON and YAML are accepted in hooks file, but for simplicity only JSON examples are provided in the rest of the documentation. To use YAML hooks file give it `.yaml` or `.yml` extension.)
+
+Begin by creating an empty file named `hooks.json`. This file will contain an array of hooks the [webhook](https://github.com/adnanh/webhook/) will serve. Check [Hook definition page](https://github.com/adnanh/webhook/wiki/Hook-Definition) to see the detailed description of what properties a hook can contain, and how to use them.
 
 Let's define a simple hook named `redeploy-webhook` that will run a redeploy script located in `/var/scripts/redeploy.sh`.
 
